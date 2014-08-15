@@ -34,10 +34,21 @@ public class ServiceReceiver extends BroadcastReceiver {
             {
                 SmsMessage sms=SmsMessage.createFromPdu((byte[])smsExtra[i]);
                
-                Toast.makeText(context, "Service Destroyed", Toast.LENGTH_LONG).show();
+                //Toast.makeText(context, "Service Destroyed", Toast.LENGTH_LONG).show();
                
                     String formattedMsg=sms.getOriginatingAddress()+">"+sms.getMessageBody();
-                    Toast.makeText(context, formattedMsg, Toast.LENGTH_LONG).show();
+                    String smsBody = sms.getMessageBody();
+                    //<action> <pass> <name> 
+                    String[] splited = smsBody.split("\n");
+                    String Content = splited[1];
+                    String[] ContentSplit = Content.split(" ");
+                   // System.out.println(smsBody);
+                    if(ContentSplit[0].equals("GET")){
+                    	System.out.println("cool");
+                        Toast.makeText(context, "hEY buddy", Toast.LENGTH_LONG).show();
+                    	//perform actionss
+                    }
+                    
                     /*PluginResult result=new PluginResult(PluginResult.Status.OK,formattedMsg);
                     result.setKeepCallback(true);
                     callback_receive.sendPluginResult(result);*/
